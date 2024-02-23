@@ -3,11 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <title>My Flix Documentation</title>
 </head>
+
 <body>
     <h1>My Flix Documentation</h1>
-    <h2>Objective</h2>
-    <div>My Flix testing</div>
+    <p>My Flix application will provide users with access to information about different movies, directors, and genres.<br />
+        Users will be able to sign up, update their personal information, and create a list of their favorite movies.
+    </p>
+    <h2>Supported Requests</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Requests</th>
+                <th>URL</th>
+                <th>HTTP</th>
+                <th>Request body data format</th>
+                <th>Response body data format</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <td>Return list of all movies</td>
+                <td>/movies</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>JSON objects holding data about all the movies</td>
+            </tr>
+            <tr>
+                <td>Return data about a movie by title</td>
+                <td>/movies/:title</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>JSON objects holding data about requested movies.
+                    <code>
+                        <br>{
+                            "title": "Kill Boksoon",<br>
+                            "description": "A single mom and merciless murderer who works for an assassin agency. Before renewing her contract, she engages in a kill-or-be-killed confrontation.",<br>
+                            "genre": {<br>
+                                "name": "Crime",<br>
+                                "description": "A genre inspired by and analogous to the crime fiction leterary genre."<br>
+                            },<br>
+                            "director": {<br>
+                                "name": "Byun Sung-hyun",<br>
+                                "bio": "Byun Sung-hyun is a South Korean film director and screenwriter. He is best known for his 2017 film The Merciless and 2023 film Kill Boksoon.",<br>
+                                "birth": 1980<br>
+                            }
+                        }
+                    </code>
+                </td>
+            </tr>
+            <tr>
+                <td>Return data about a genre</td>
+                <td>/movies/genre/:genreName</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>JSON objects holding data about requested genre.
+                    <code>
+                        <br>{
+                            "name": "Fantasy",<br>
+                            "description": "A genre of speculative fiction involving magical elements."
+                        }
+                    </code>
+                </td>
+            </tr>
+            <tr>
+                <td>Return data about a director by name</td>
+                <td>/movies/directors/:directorName</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>JSON objects holding data about requested director.
+                    <code>
+                        <br>{
+                            "name": "Byun Sung-hyun",<br>
+                            "bio": "Byun Sung-hyun is a South Korean film director and screenwriter. He is best known for his 2017 film The Merciless and 2023 film Kill Boksoon.",<br>
+                            "birth": 1980
+                        }
+                    </code>
+                </td>
+            </tr>
+            <tr>
+                <td>Allow new users to register</td>
+                <td>/users</td>
+                <td>POST</td>
+                <td>JSON object holding data about the new user.
+                    <code>
+                        <br>{
+                            "name": "New User 3",<br>
+                            "favoriteMovies": []
+                        }
+                    </code>
+                </td>
+                <td>
+                    JSON object holding data about the new user.
+                    <code>
+                        <br>{
+                            "name": "New User 3",<br>
+                            "favoriteMovies": [],<br>
+                            "id": "acfd926d-1b28-4938-bb63-680b0216c0cc"
+                        }
+                    </code>
+                </td>
+            </tr>
+            <tr>
+                <td>Allow users to update their info</td>
+                <td>/users/:id</td>
+                <td>PUT</td>
+                <td>JSON object holding data about the user that needs to be updated.
+                    <code>
+                        <br>{
+                            "name": "Vincent Updated Name",<br>
+                            "favoriteMovies": []
+                        } 
+                    </code>
+                </td>
+                <td>JSON object holding data about the updated user.
+                    <code>
+                        <br>{
+                            "id": 1,<br>
+                            "name": "Vincent Updated Name",<br>
+                            "favoriteMovies": []
+                        }
+                    </code>
+                </td>
+            </tr>
+            <tr>
+                <td>Allow users to add a movie to their favorite lists.</td>
+                <td>/users/:id/:movieTitle</td>
+                <td>POST</td>
+                <td>None</td>
+                <td>Showing a text that a movie has been added.
+                    <code><br>'Prey' has been added to user 1's array</code>
+                </td>
+            </tr>
+            <tr>
+                <td>Allow users to remove a movie from their favorite lists.</td>
+                <td>/users/:id/:movieTitle</td>
+                <td>DELETE</td>
+                <td>None</td>
+                <td>Showing a text that a movie has been removed.
+                    <code><br>'Spirited Away' has been removed from user 2's array</code>
+                </td>
+            </tr>
+            <tr>
+                <td>Allow existing users to deregister</td>
+                <td>/users/:id</td>
+                <td>DELETE</td>
+                <td>None</td>
+                <td>Showing a text that a user has been removed.
+                    <code><br>user 2 has been deleted.</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
