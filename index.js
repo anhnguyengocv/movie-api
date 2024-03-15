@@ -18,8 +18,8 @@ mongoose.connect('mongodb://localhost:27017/cfDB', {
 
 //Logging middleware
 app.use(morgan('common'));
-
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 // let users = [
 //     {
@@ -186,6 +186,7 @@ app.use(bodyParser.json());
 
 //Allow new users to register (C)
 app.get('/users', async (req, res) => {
+    console.log("querying database");
     await Users.find()
       .then((users) => {
         res.status(201).json(users);
