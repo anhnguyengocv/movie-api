@@ -47,7 +47,7 @@ app.get('/movies/:title', async (req, res) => {
         });
 });
 
-//return a genre
+//return a genre by name
 app.get('/genres/:name', async (req, res) => {
     console.log("querying database")
     await Movies.findOne({ "genre.name": req.params.name })
@@ -121,9 +121,9 @@ app.put('/users/:username', async (req, res) => {
 });
 
 //add a movie to user's list of favorites
-app.post('/users/:username/movies/:_id', async (req, res) => {
+app.post('/users/:username/movies/:id', async (req, res) => {
     await Users.findOneAndUpdate({ username: req.params.username }, {
-       $push: { favMovies: req.params._id }
+       $push: { favMovies: req.params.id }
      },
      { new: true }) // This line makes sure that the updated document is returned
     .then((updatedUser) => {
