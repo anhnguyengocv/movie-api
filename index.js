@@ -136,9 +136,9 @@ app.post('/users/:username/movies/:_id', async (req, res) => {
   });
 
 //allow users to remove a movie from fav list
-app.delete('/users/:username/movies/:_id', async (req, res) => {
-    await Users.findOneAndUpdate({ username: req.params.username }, {
-        $pull: { favMovies: req.params._id }
+app.delete('/users/:username/movies/:id', async (req, res) => {
+    await Users.findOneAndDelete({ username: req.params.username }, {
+        $pull: { favMovies: req.params.id }
     },
     { new: true })
     .then((updateUser) => {
