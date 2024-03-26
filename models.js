@@ -21,11 +21,11 @@ let userSchema = mongoose.Schema({
     password: {type: String, required: true},
     email: {type: String, required: true},
     birthday: Date,
-    favMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'movies' }]
+    favMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'movie' }]
   });
   
-  let Movie = mongoose.model('movies', movieSchema);
-  let User = mongoose.model('users', userSchema);
+  let Movie = mongoose.model('movie', movieSchema);
+  let User = mongoose.model('user', userSchema);
   
   module.exports.Movie = Movie;
   module.exports.User = User;
